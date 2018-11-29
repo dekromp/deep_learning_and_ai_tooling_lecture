@@ -68,10 +68,6 @@ def build_objective(output):
     """
     # Build the loss.
     with tf.name_scope('loss'):
-        """
-        Really nasty bug here: tensor multiply does broadcasting which causes
-        input_y * output to be of shape batch x batch.
-        """
         # Flatten the output.
         output = tf.reshape(output, [-1])
         # Create an input for the inputs
@@ -126,7 +122,13 @@ def sigmoid(x):
         The activated input.
 
     """
-    return 1.0 / (1.0 + tf.exp(-x))
+    # Make sure that the values of x are not too small/big.
+    x = tf.clip_by_value(x, -80, 80)
+
+    negative = tf.less(x, 0.0)
+    activation = tf.where(
+        negative, tf.exp(x) / (1.0 + tf.exp(x)), 1.0 / (1.0 + tf.exp(-x)))
+    return activation
 
 
 def dense_layer(x, layer_name, units, activation=None):

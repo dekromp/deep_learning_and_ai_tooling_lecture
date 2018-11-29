@@ -1,6 +1,6 @@
 """A simple feedforward network that is trained on data.
 
-Here an error in the graph caused a runtime error.
+Here an error in the graph causes a runtime error.
 """
 import numpy as np
 import tensorflow as tf
@@ -72,10 +72,6 @@ def build_objective(output):
     """
     # Build the loss.
     with tf.variable_scope('loss'):
-        """
-        Really nasty bug here: tensor multiply does broadcasting which causes
-        input_y * output to be of shape batch x batch.
-        """
         # Flatten the output.
         output = tf.reshape(output, [-1])
         # Create an input for the inputs

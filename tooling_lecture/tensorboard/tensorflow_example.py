@@ -94,10 +94,6 @@ def build_objective(output, learning_rate):
     """
     # Build the loss.
     with tf.name_scope('loss'):
-        """
-        Really nasty bug here: tensor multiply does broadcasting which causes
-        input_y * output to be of shape batch x batch.
-        """
         # Flatten the output.
         output = tf.reshape(output, [-1])
         # Create an input for the inputs

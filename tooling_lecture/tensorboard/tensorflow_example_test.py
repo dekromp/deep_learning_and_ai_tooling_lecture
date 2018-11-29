@@ -1,3 +1,4 @@
+"""Some tests if own implementations with stability issues are correct."""
 import numpy as np
 from numpy.testing import assert_almost_equal
 import tensorflow as tf
@@ -6,6 +7,7 @@ from .tensorflow_example import sigmoid
 
 
 def test_sigmoid():
+    """Test own implementation of the stable sigmoid function."""
     x = np.arange(-100, 100, 10).astype(np.float32)
     x_input = tf.placeholder(tf.float32, [None])
 
@@ -14,13 +16,9 @@ def test_sigmoid():
             [tf.sigmoid(x), sigmoid(x)], feed_dict={x_input: x})
         assert_almost_equal(r1, r2)
 
-        x[0] = 88.38223
-        print(session.run(tf.exp(x_input), feed_dict={x_input: x}))
-        print(session.run(tf.sigmoid(x_input), feed_dict={x_input: x}))
-        print(session.run(sigmoid(x_input), feed_dict={x_input: x}))
-
 
 def test_binary_cross_entropy():
+    """Test own implementation of stable binary cross entropy."""
     logits = tf.placeholder(tf.float32, [None])
     input_y = tf.placeholder(tf.float32, [None])
 
