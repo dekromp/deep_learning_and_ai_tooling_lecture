@@ -1,0 +1,1 @@
+sudo docker build -t tooling_lecture/model_server:latest .
