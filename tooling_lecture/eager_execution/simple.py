@@ -18,17 +18,12 @@ w = tf.get_variable(
 
 # Interwine python and tensorflow code directly.
 z = tf.matmul(w, x)
-for i in range(5):
-    if i % 2 == 0:
-        h = -tf.nn.sigmoid(z)
-    else:
-        h = tf.nn.sigmoid(z)
+if np.sum(x) > 0:
+    h = -tf.nn.sigmoid(z)
+else:
+    h = tf.nn.sigmoid(z)
 
-    # Evaluate immediately the output without session run.
-    print(h)
+# Evaluate immediately the output without session run.
+print(h)
 
-# tf.Tensor([[-0.36252844]], shape=(1, 1), dtype=float32)
-# tf.Tensor([[0.36252844]], shape=(1, 1), dtype=float32)
-# tf.Tensor([[-0.36252844]], shape=(1, 1), dtype=float32)
-# tf.Tensor([[0.36252844]], shape=(1, 1), dtype=float32)
 # tf.Tensor([[-0.36252844]], shape=(1, 1), dtype=float32)
