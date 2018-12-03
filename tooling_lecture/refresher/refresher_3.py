@@ -55,7 +55,7 @@ def build_forward_pass():
         The output of the forward pass.
 
     """
-    # Create an placeholder for feeding inputs in the graph.
+    # Create a placeholder for feeding inputs in the graph.
     input_x = tf.placeholder(tf.float32, [None, 3], name='features')
 
     # Create a variable, which will be automatically added to the trainable

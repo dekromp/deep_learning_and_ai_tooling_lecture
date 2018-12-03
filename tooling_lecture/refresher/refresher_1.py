@@ -7,7 +7,7 @@ import tensorflow as tf
 tf.set_random_seed(12345)
 np.random.seed(12321)
 
-# Create an placeholder for feeding inputs in the graph.
+# Create a placeholder for feeding inputs in the graph.
 input_x = tf.placeholder(tf.float32, [None, 3], name='features')
 
 # Create a variable.

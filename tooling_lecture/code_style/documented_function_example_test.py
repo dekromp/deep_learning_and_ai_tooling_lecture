@@ -9,7 +9,7 @@ np.random.seed(123456)
 
 
 def test_fit_linear():
-    """The the fit_linear function from the slides."""
+    """Test the fit_linear function from the slides."""
     # Generate a random linear regression model on random data.
     x = np.random.randn(100, 3)
     true_w = np.array([0.3, -0.21, 0.8])
@@ -18,5 +18,5 @@ def test_fit_linear():
     # Use our function to compute the parameters.
     w = fit_linear(x, y)
 
-    # Should be the same as the true w.
+    # Should be very similar to the true w.
     assert_array_almost_equal(true_w, w)
