@@ -12,7 +12,7 @@ np.random.seed(1212)
 tf.set_random_seed(112321)
 
 
-def main(num_epochs, batch_size, learning_rate, experiment_dir, debug):
+def main(num_epochs, batch_size, learning_rate, experiment_dir):
     """Train a simple model on random data.
 
     Parameters
@@ -25,8 +25,6 @@ def main(num_epochs, batch_size, learning_rate, experiment_dir, debug):
         The learning rate used for SGD.
     experiment_dir : str
         The path to the experiment directory where the summaries will be saved.
-    debug : bool
-        Whether or not the script is debugged with the tensorflow debugger.
 
     """
     # Create some random data.
@@ -123,10 +121,6 @@ if __name__ == '__main__':
         '-d', '--experiment-dir', type=str,
         default='../tensorboard/experiments/keras_default',
         help='The path to the experiment directory.')
-    parser.add_argument(
-        '--debug',
-        help='Debug the script with the tensorflow debugger.',
-        action='store_true')
     args = parser.parse_args()
     config = vars(args)
     main(**config)

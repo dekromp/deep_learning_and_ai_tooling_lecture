@@ -25,6 +25,8 @@ x = np.random.randn(5, 3)
 with tf.Session() as session:
     # Boilerplate code that initializes all variables in the graph (just w).
     session.run(tf.global_variables_initializer())
+
+    # Execute the graph we build on the data.
     output_value = session.run(output, feed_dict={input_x: x})
     print('Output: %s' % str(output_value))
     # Output: [ 1.382279  -0.9660325 -0.5551475  0.1781615 -1.5802894]

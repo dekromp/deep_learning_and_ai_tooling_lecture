@@ -259,7 +259,7 @@ def train_model(inputs, train_data, val_data, loss, update_op, num_epochs,
         # Initialize all variables in the graph.
         session.run(tf.global_variables_initializer())
         epoch_train_loss = np.inf
-        for epoch in range(num_epochs):  # Train for 15 epochs.
+        for epoch in range(num_epochs):
             # Compute the summaries on the validation data.
             summaries = session.run(
                 all_summaries_op,

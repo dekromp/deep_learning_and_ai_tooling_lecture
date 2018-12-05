@@ -13,7 +13,7 @@ tf.set_random_seed(112321)
 
 
 def main(num_epochs, batch_size, l2_factor, learning_rate, experiment_dir,
-         debug, verbose):
+         verbose):
     """Train a simple model on random data.
 
     Parameters
@@ -28,8 +28,6 @@ def main(num_epochs, batch_size, l2_factor, learning_rate, experiment_dir,
         The learning rate used for SGD.
     experiment_dir : str
         The path to the experiment directory where the summaries will be saved.
-    debug : bool
-        Whether or not the script is debugged with the tensorflow debugger.
     verbose : int
         The level of logging of model training. Either 0=silent, 1, or 2.
 
@@ -149,10 +147,6 @@ if __name__ == '__main__':
         '-d', '--experiment-dir', type=str,
         default='./experiments/mymodel_bs[8]_l2[1e-4]_lr[1e-2])',
         help='The path to the experiment directory.')
-    parser.add_argument(
-        '--debug',
-        help='Debug the script with the tensorflow debugger.',
-        action='store_true')
     parser.add_argument(
         '-v', '--verbose', type=int, default=0,
         help='The level of logging during training.')

@@ -216,7 +216,7 @@ def train_model(inputs, data, loss, update_op, debug):
         session.run(tf.global_variables_initializer())
         num_epochs = 100
         batch_size = 8
-        for epoch in range(num_epochs):  # Train for 15 epochs.
+        for epoch in range(num_epochs):
             # Shuffle the training data.
             shuffle_idx = np.random.permutation(np.arange(len(x1)))
             x1 = x1[shuffle_idx]
