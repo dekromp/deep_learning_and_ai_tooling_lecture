@@ -106,12 +106,12 @@ class DenseLayer(object):
 
         Parameters
         ----------
-        x : :class:`tf.tensor` or :class:`numpy.ndarray`
+        x : tf.tensor or numpy.ndarray
             The input to this layer.
 
         Returns
         -------
-        h : :class:`tf.tensor`
+        h : tf.tensor
             The output of this layer.
 
         """
@@ -126,12 +126,12 @@ def relu(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -143,12 +143,12 @@ def sigmoid(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -166,11 +166,11 @@ def load_data():
 
     Returns
     -------
-    x1 : :class:`numpy.ndarray`
+    x1 : numpy.ndarray
         The dummy data for the first feature set.
-    x2 : :class:`numpy.ndarray`
+    x2 : numpy.ndarray
         The dummy data for the second feature set.
-    y : :class:`numpy.ndarray`
+    y : numpy.ndarray
         The data for the targets.
 
     """

@@ -190,13 +190,13 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    input_x : :class:`tf.tensor`</span>
+<span class="sd">    input_x : tf.tensor</span>
 <span class="sd">        The input tensor for the features.</span>
-<span class="sd">    output: :class:`tf.tensor`</span>
+<span class="sd">    output: tf.tensor</span>
 <span class="sd">        The output of the forward pass.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Create an placeholder for feeding inputs in the graph.</span>
+    <span class="c1"># Create a placeholder for feeding inputs in the graph.</span>
     <span class="n">input_x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;features&#39;</span><span class="p">)</span>
 
     <span class="c1"># Create a variable, which will be automatically added to the trainable</span>
@@ -216,18 +216,18 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    output : :class:`tf.tensor`</span>
+<span class="sd">    output : tf.tensor</span>
 <span class="sd">        The tensor that represents the output of the model.</span>
 <span class="sd">    learning_rate : float</span>
 <span class="sd">        The learning rate used for SGD.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    update_op : :class:`tf.tensor`</span>
+<span class="sd">    update_op : tf.tensor</span>
 <span class="sd">        The tensor that represents the output of the update operation.</span>
-<span class="sd">    loss : :class:`tf.tensor`</span>
+<span class="sd">    loss : tf.tensor</span>
 <span class="sd">        The tensor that represents the outputof the loss.</span>
-<span class="sd">    input_y : :class:`tf.tensor`</span>
+<span class="sd">    input_y : tf.tensor</span>
 <span class="sd">        The input tensor for the targets.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -253,10 +253,10 @@
 <span class="sd">    data : tuple</span>
 <span class="sd">        The data the model should be trained on. Must have the same order as</span>
 <span class="sd">        inputs.</span>
-<span class="sd">    loss : :class:`tf.tensor`</span>
+<span class="sd">    loss : tf.tensor</span>
 <span class="sd">        The tensor that represents the output of the loss. Used for computing</span>
 <span class="sd">        the training loss.</span>
-<span class="sd">    update_op : :class:`tf.tensor`</span>
+<span class="sd">    update_op : tf.tensor</span>
 <span class="sd">        The tensor that represents the output of the update operation.</span>
 <span class="sd">    batch_size : int</span>
 <span class="sd">        The batch size used for SGD.</span>

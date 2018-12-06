@@ -41,11 +41,11 @@ def build_forward_pass():
 
     Returns
     -------
-    input_x1 : :class:`tf.tensor`
+    input_x1 : tf.tensor
         The input for the first feature set.
-    input_x2 : :class:`tf.tensor`
+    input_x2 : tf.tensor
         The input for the second feature set.
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The output of the model.
 
     """
@@ -56,6 +56,7 @@ def build_forward_pass():
         h2 = dense_layer(input_x2, 'layer2', 7, activation=relu)
         h = tf.concat([h1, h2], axis=-1)
         output = dense_layer(h, 'output_layer', 1)
+        output = sigmoid(output)
 
     return input_x1, input_x2, output
 
@@ -65,16 +66,16 @@ def build_objective(output):
 
     Parameters
     ----------
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The tensor that represents the output of the model.
 
     Returns
     -------
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the outputof the loss.
-    input_y : :class:`tf.tensor`
+    input_y : tf.tensor
         The input tensor for the targets.
 
     """
@@ -108,12 +109,12 @@ def relu(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -125,12 +126,12 @@ def sigmoid(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -148,7 +149,7 @@ def dense_layer(x, layer_name, units, activation=None):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
     layer_name : name
         The name scope of the variables.
@@ -161,7 +162,7 @@ def dense_layer(x, layer_name, units, activation=None):
 
     Returns
     -------
-    h : :class:`tf.tensor`
+    h : tf.tensor
         The output of this layer.
 
     """
@@ -194,10 +195,10 @@ def train_model(inputs, data, loss, update_op, debug):
     data : tuple
         The data the model should be trained on. Must have the same order as
         inputs.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the output of the loss. Used for computing
         the training loss.
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
     debug : bool
         Whether or not the script is debugged with the tensorflow debugger.
@@ -241,11 +242,11 @@ def load_data():
 
     Returns
     -------
-    x1 : :class:`numpy.ndarray`
+    x1 : numpy.ndarray
         The dummy data for the first feature set.
-    x2 : :class:`numpy.ndarray`
+    x2 : numpy.ndarray
         The dummy data for the second feature set.
-    y : :class:`numpy.ndarray`
+    y : numpy.ndarray
         The data for the targets.
 
     """

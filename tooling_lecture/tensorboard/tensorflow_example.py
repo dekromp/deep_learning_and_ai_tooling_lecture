@@ -49,11 +49,11 @@ def build_forward_pass():
 
     Returns
     -------
-    input_x1 : :class:`tf.tensor`
+    input_x1 : tf.tensor
         The input for the first feature set.
-    input_x2 : :class:`tf.tensor`
+    input_x2 : tf.tensor
         The input for the second feature set.
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The output of the model.
 
     """
@@ -77,18 +77,18 @@ def build_objective(output, learning_rate):
 
     Parameters
     ----------
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The tensor that represents the output of the model.
     learning_rate : float
         The learning rate used for SGD.
 
     Returns
     -------
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the outputof the loss.
-    input_y : :class:`tf.tensor`
+    input_y : tf.tensor
         The input tensor for the targets.
 
     """
@@ -126,12 +126,12 @@ def relu(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -143,12 +143,12 @@ def sigmoid(x):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
 
     Returns
     -------
-    activated : :class:`tf.tensor`
+    activated : tf.tensor
         The activated input.
 
     """
@@ -166,7 +166,7 @@ def dense_layer(x, layer_name, units, activation=None):
 
     Parameters
     ----------
-    x : :class:`tf.tensor`
+    x : tf.tensor
         The input to this op.
     layer_name : name
         The name scope of the variables.
@@ -179,7 +179,7 @@ def dense_layer(x, layer_name, units, activation=None):
 
     Returns
     -------
-    h : :class:`tf.tensor`
+    h : tf.tensor
         The output of this layer.
 
     """
@@ -220,10 +220,10 @@ def train_model(inputs, train_data, val_data, loss, update_op, num_epochs,
         inputs.
     val_data : tuple
         The data used for monitoring.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the output of the loss. Used for computing
         the training loss.
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
     num_epochs : int
         The number of epochs the model is trained.
@@ -294,11 +294,11 @@ def load_data():
 
     Returns
     -------
-    x1 : :class:`numpy.ndarray`
+    x1 : numpy.ndarray
         The dummy data for the first feature set.
-    x2 : :class:`numpy.ndarray`
+    x2 : numpy.ndarray
         The dummy data for the second feature set.
-    y : :class:`numpy.ndarray`
+    y : numpy.ndarray
         The data for the targets.
 
     """
@@ -317,16 +317,16 @@ def split_dataset(dataset, size):
 
     Parameters
     ----------
-    dataset : tuple of :class:`numpy.ndarray`
+    dataset : tuple of numpy.ndarray
         The arrays of the dataset.
     size : float
         [0, 1], the relative size of the first half of the split.
 
     Returns
     -------
-    dataset1 : tuple of :class:`numpy.ndarray`
+    dataset1 : tuple of numpy.ndarray
         The first part of the split.
-    dataset2 : tuple of :class:`numpy.ndarray`
+    dataset2 : tuple of numpy.ndarray
         The second part of the split.
 
     """

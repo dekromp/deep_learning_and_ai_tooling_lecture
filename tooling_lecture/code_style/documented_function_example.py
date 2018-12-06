@@ -14,14 +14,14 @@ def fit_linear(x, y):
 
     Parameters
     ----------
-    x : :class:`numpy.ndarray`
+    x : numpy.ndarray
         The feature data.
-    y : :class:`numpy.ndarray`
+    y : numpy.ndarray
         The target data.
 
     Returns
     -------
-    w : :class:`numpy.ndarray`
+    w : numpy.ndarray
         The parameters of the linear regression model.
 
     """

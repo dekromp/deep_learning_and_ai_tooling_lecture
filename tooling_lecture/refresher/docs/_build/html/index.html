@@ -158,8 +158,8 @@ a command line interface to change the run configuration.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><strong>input_x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The input tensor for the features.</li>
-<li><strong>output</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The output of the forward pass.</li>
+<li><strong>input_x</strong> (<em>tf.tensor</em>) – The input tensor for the features.</li>
+<li><strong>output</strong> (<em>tf.tensor</em>) – The output of the forward pass.</li>
 </ul>
 </td>
 </tr>
@@ -176,15 +176,15 @@ a command line interface to change the run configuration.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The tensor that represents the output of the model.</li>
+<li><strong>output</strong> (<em>tf.tensor</em>) – The tensor that represents the output of the model.</li>
 <li><strong>learning_rate</strong> (<em>float</em>) – The learning rate used for SGD.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>update_op</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The tensor that represents the output of the update operation.</li>
-<li><strong>loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The tensor that represents the outputof the loss.</li>
-<li><strong>input_y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The input tensor for the targets.</li>
+<li><strong>update_op</strong> (<em>tf.tensor</em>) – The tensor that represents the output of the update operation.</li>
+<li><strong>loss</strong> (<em>tf.tensor</em>) – The tensor that represents the outputof the loss.</li>
+<li><strong>input_y</strong> (<em>tf.tensor</em>) – The input tensor for the targets.</li>
 </ul>
 </p>
 </td>
@@ -224,9 +224,9 @@ a command line interface to change the run configuration.</p>
 <li><strong>inputs</strong> (<em>tuple</em>) – The input tensors for training.</li>
 <li><strong>data</strong> (<em>tuple</em>) – The data the model should be trained on. Must have the same order as
 inputs.</li>
-<li><strong>loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The tensor that represents the output of the loss. Used for computing
+<li><strong>loss</strong> (<em>tf.tensor</em>) – The tensor that represents the output of the loss. Used for computing
 the training loss.</li>
-<li><strong>update_op</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tf.tensor</span></code>) – The tensor that represents the output of the update operation.</li>
+<li><strong>update_op</strong> (<em>tf.tensor</em>) – The tensor that represents the output of the update operation.</li>
 <li><strong>batch_size</strong> (<em>int</em>) – The batch size used for SGD.</li>
 <li><strong>num_epochs</strong> (<em>int</em>) – The number of epochs the model is trained.</li>
 </ul>

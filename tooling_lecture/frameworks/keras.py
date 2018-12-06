@@ -58,11 +58,11 @@ def build_forward_pass():
 
     Returns
     -------
-    input_x1 : :class:`tf.tensor`
+    input_x1 : tf.tensor
         The input for the first feature set.
-    input_x2 : :class:`tf.tensor`
+    input_x2 : tf.tensor
         The input for the second feature set.
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The output of the model.
 
     """
@@ -85,11 +85,11 @@ def load_data():
 
     Returns
     -------
-    x1 : :class:`numpy.ndarray`
+    x1 : numpy.ndarray
         The dummy data for the first feature set.
-    x2 : :class:`numpy.ndarray`
+    x2 : numpy.ndarray
         The dummy data for the second feature set.
-    y : :class:`numpy.ndarray`
+    y : numpy.ndarray
         The data for the targets.
 
     """

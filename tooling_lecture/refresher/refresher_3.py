@@ -49,9 +49,9 @@ def build_forward_pass():
 
     Returns
     -------
-    input_x : :class:`tf.tensor`
+    input_x : tf.tensor
         The input tensor for the features.
-    output: :class:`tf.tensor`
+    output: tf.tensor
         The output of the forward pass.
 
     """
@@ -75,18 +75,18 @@ def build_objective(output, learning_rate):
 
     Parameters
     ----------
-    output : :class:`tf.tensor`
+    output : tf.tensor
         The tensor that represents the output of the model.
     learning_rate : float
         The learning rate used for SGD.
 
     Returns
     -------
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the outputof the loss.
-    input_y : :class:`tf.tensor`
+    input_y : tf.tensor
         The input tensor for the targets.
 
     """
@@ -112,10 +112,10 @@ def train_model(inputs, data, loss, update_op, batch_size, num_epochs):
     data : tuple
         The data the model should be trained on. Must have the same order as
         inputs.
-    loss : :class:`tf.tensor`
+    loss : tf.tensor
         The tensor that represents the output of the loss. Used for computing
         the training loss.
-    update_op : :class:`tf.tensor`
+    update_op : tf.tensor
         The tensor that represents the output of the update operation.
     batch_size : int
         The batch size used for SGD.
