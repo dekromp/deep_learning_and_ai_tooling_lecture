@@ -11,27 +11,14 @@ np.random.seed(1)
 tf.random.set_seed(1)
 
 
-def train(num_epochs, batch_size, learning_rate, jobdir):
-    """Train a model on data.
-
-    Parameters
-    ----------
-    num_epochs : int
-        The number of epochs the model is trained.
-    batch_size : int
-        The batch size used for SGD.
-    learning_rate : float
-        The learning rate used for SGD.
-    jobdir : str
-        The path to the directory where all training results will be saved.
-
-    """
+def main(jobdir):
+    """Train a model on data."""
     x, y = load_data()
     model = build_model()
 
     # Configure the model for training.
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
+        optimizer=tf.keras.optimizers.Adam(lr=0.001),
         metrics=[tf.keras.metrics.BinaryAccuracy()],
         loss=tf.keras.losses.binary_crossentropy,
     )
@@ -49,12 +36,7 @@ def train(num_epochs, batch_size, learning_rate, jobdir):
 
     # Train the model.
     model.fit(
-        x=x,
-        y=y,
-        batch_size=batch_size,
-        epochs=num_epochs,
-        verbose=2,
-        callbacks=callbacks,
+        x=x, y=y, batch_size=8, epochs=100, verbose=2, callbacks=callbacks
     )
 
 
@@ -87,12 +69,10 @@ def build_model():
 
     """
     input_x = tf.keras.Input(
-        shape=(30,), name='input_x'
+        shape=(30,)
     )  # shape does not include the batch size.
     layer1 = tf.keras.layers.Dense(5, activation=tf.keras.activations.tanh)
-    layer2 = tf.keras.layers.Dense(
-        1, activation=tf.keras.activations.sigmoid, name='output_layer'
-    )
+    layer2 = tf.keras.layers.Dense(1, activation=tf.keras.activations.sigmoid)
     h = layer1(input_x)
     output = layer2(h)
     return tf.keras.Model(inputs=[input_x], outputs=[output])
@@ -100,9 +80,9 @@ def build_model():
 
 if __name__ == '__main__':
     jobdir = os.path.join(
-        os.path.dirname(__file__), 'experiments', 'keras_example'
+        os.path.dirname(__file__), 'training_with_callbacks_results'
     )
     # Clean up before starting the training.
     if os.path.exists(jobdir):
         shutil.rmtree(jobdir)
-    train(num_epochs=100, batch_size=8, learning_rate=0.001, jobdir=jobdir)
+    main(jobdir)

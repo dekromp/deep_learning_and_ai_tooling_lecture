@@ -1,56 +1,45 @@
 """Load a keras model and save it in a format understood by tf serving."""
+import os
+
 import tensorflow as tf
 
 
+this_dir = os.path.dirname(__file__)
+
 # Load the keras model from disc.
 model = tf.keras.models.load_model(
-    './experiments/keras_example/model.h5')
+    os.path.join(this_dir, 'experiments', 'keras_example', 'model.h5')
+)
 
-# Set the export path. Tensorflow serving takes the last directory name as the
-# version of the model.
-export_path = './production_models/keras_example/1'
-builder = tf.saved_model.builder.SavedModelBuilder(export_path)
+export_path = os.path.join(this_dir, 'production_models', 'keras_example', '1')
 
-# Create a signature definition for tfserving.
-# We will use the predict API which allows us to have an arbitrary number of
-# inputs and outputs.
-model_signature = tf.saved_model.signature_def_utils.build_signature_def(
-    inputs={tensor.name: tf.saved_model.utils.build_tensor_info(tensor)
-            for tensor in model.inputs},
-    outputs={tensor.name: tf.saved_model.utils.build_tensor_info(tensor)
-             for tensor in model.outputs},
-    method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME)
+model.save(filepath=export_path, include_optimizer=False, save_format='tf')
 
-# Serialize the model.
-with tf.keras.backend.get_session() as session:
-    builder.add_meta_graph_and_variables(
-        session,
-        [tf.saved_model.tag_constants.SERVING],  # This is just a tag.
-        signature_def_map={
-            'predict_whatever':
-                model_signature,
-        })
+"""
+We can inspect the exported model by using the saved_model cli:
+$ saved_model_cli show --dir=./production_models/keras_example/1 --all
 
-    # Export the model to the production_models/1 folder.
-    builder.save(as_text=True)
+MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
 
-# We can inspect the exported model by using the saved_model cli:
-# $ saved_model_cli show --dir=./production_models/keras_example1 --all
-# MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
+signature_def['__saved_model_init_op']:
+  The given SavedModel SignatureDef contains the following input(s):
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['__saved_model_init_op'] tensor_info:
+        dtype: DT_INVALID
+        shape: unknown_rank
+        name: NoOp
+  Method name is:
 
-# signature_def['predict_whatever']:
-#   The given SavedModel SignatureDef contains the following input(s):
-#     inputs['input_x1:0'] tensor_info:
-#         dtype: DT_FLOAT
-#         shape: (-1, 10)
-#         name: input_x1:0
-#     inputs['input_x2:0'] tensor_info:
-#         dtype: DT_FLOAT
-#         shape: (-1, 20)
-#         name: input_x2:0
-#   The given SavedModel SignatureDef contains the following output(s):
-#     outputs['output_layer/Sigmoid:0'] tensor_info:
-#         dtype: DT_FLOAT
-#         shape: (-1, 1)
-#         name: output_layer/Sigmoid:0
-#   Method name is: tensorflow/serving/predict
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['input_x'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (-1, 30)
+        name: serving_default_input_x:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['output_layer'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (-1, 1)
+        name: StatefulPartitionedCall:0
+  Method name is: tensorflow/serving/predict
+"""

@@ -1,23 +1,26 @@
 """Example script that shows how the REST-API of the model is called."""
 import json
+import sys
 
 import numpy as np
 import requests
 
 
+# Url where tensorflow serving is running.
 url = 'http://localhost:8501/v1/models/keras_example:predict'
 
-# We can inspect the exported model by using the saved_model cli:
-# $ saved_model_cli show --dir=./production_models/keras_example1 --all
+# The data we will send to the server.
 data = {
-    'signature_name': 'predict_whatever',
-    'inputs': {
-        'input_x1:0': np.random.randn(1, 10).astype(np.float32).tolist(),
-        'input_x2:0': np.random.randn(1, 20).astype(np.float32).tolist()
-    }}
+    'signature_name': 'serving_default',
+    'inputs': {'input_x': np.random.randn(1, 30).astype(np.float32).tolist()},
+}
 
 data = json.dumps(data)
 # Send the request to the server.
-response = requests.post(url, data=data)
+try:
+    response = requests.post(url, data=data)
+except requests.exceptions.ConnectionError as e:
+    print('The REST-service seems not to be up.')
+    sys.exit(1)
 
 print('The model predicts a value of %.4f.' % response.json()['outputs'][0][0])
