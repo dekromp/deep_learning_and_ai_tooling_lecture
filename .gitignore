@@ -1,0 +1,11 @@
+*.pyc
+*.egg-info
+*~
+.coverage
+.cache/
+.pytest_cache/
+*experiments/
+*.ipynb
+*notebooks/
+*__pycache__
+*production_models/

@@ -9,11 +9,12 @@ import tensorflow as tf
 
 # Set all random seeds for reproducebility.
 np.random.seed(1212)
-tf.set_random_seed(112321)
+tf.random.set_seed(112321)
 
 
-def main(num_epochs, batch_size, l2_factor, learning_rate, experiment_dir,
-         verbose):
+def main(
+    num_epochs, batch_size, l2_factor, learning_rate, experiment_dir, verbose
+):
     """Train a simple model on random data.
 
     Parameters
@@ -35,30 +36,39 @@ def main(num_epochs, batch_size, l2_factor, learning_rate, experiment_dir,
     # Create some random data.
     dataset = load_data()
     x1, x1_val, x2, x2_val, y, y_val = train_test_split(
-        *dataset, test_size=0.1)
-
-    # Build forward pass through the network.
-    input_x1, input_x2, output = build_forward_pass(l2_factor)
+        *dataset, test_size=0.1
+    )
 
     # Build the model with keras.
-    model = tf.keras.Model([input_x1, input_x2], [output])
+    model = build_model(l2_factor)
+
     # Build loss and the update operations.
     optimizer = tf.keras.optimizers.SGD(lr=learning_rate)
-    model.compile(optimizer, loss=tf.keras.losses.binary_crossentropy)
+    model.compile(
+        optimizer,
+        loss=tf.keras.losses.binary_crossentropy,
+        metrics=['binary_accuracy'],
+    )
 
     # Define some callbacks.
     tensorboard_callback = tf.keras.callbacks.TensorBoard(
-        experiment_dir, write_graph=False, write_images=False,
-        histogram_freq=1)
+        experiment_dir, write_graph=False, write_images=False, histogram_freq=1
+    )
     callbacks = [tensorboard_callback]
 
     # Train the model on the data.
-    model.fit(x=[x1, x2], y=y, batch_size=batch_size, epochs=num_epochs,
-              validation_data=([x1_val, x2_val], y_val), verbose=verbose,
-              callbacks=callbacks)
+    model.fit(
+        x=[x1, x2],
+        y=y,
+        batch_size=batch_size,
+        epochs=num_epochs,
+        validation_data=([x1_val, x2_val], y_val),
+        verbose=verbose,
+        callbacks=callbacks,
+    )
 
 
-def build_forward_pass(l2_factor):
+def build_model(l2_factor):
     """Build the forward pass of the model.
 
     Parameters
@@ -68,12 +78,8 @@ def build_forward_pass(l2_factor):
 
     Returns
     -------
-    input_x1 : tf.tensor
-        The input for the first feature set.
-    input_x2 : tf.tensor
-        The input for the second feature set.
-    output : tf.tensor
-        The output of the model.
+    tf.keras.Model
+        The model.
 
     """
     with tf.name_scope('forward_pass'):
@@ -85,22 +91,25 @@ def build_forward_pass(l2_factor):
             activation=tf.nn.relu,
             name='layer1',
             kernel_regularizer=regularizer,
-            bias_regularizer=regularizer)(input_x1)
+            bias_regularizer=regularizer,
+        )(input_x1)
         h2 = tf.keras.layers.Dense(
             units=7,
             activation=tf.nn.relu,
             name='layer2',
             kernel_regularizer=regularizer,
-            bias_regularizer=regularizer)(input_x2)
+            bias_regularizer=regularizer,
+        )(input_x2)
         h = tf.keras.layers.Concatenate(axis=-1)([h1, h2])
         output = tf.keras.layers.Dense(
             units=1,
             activation=tf.nn.sigmoid,
             name='output_layer',
             kernel_regularizer=regularizer,
-            bias_regularizer=regularizer)(h)
+            bias_regularizer=regularizer,
+        )(h)
 
-    return input_x1, input_x2, output
+    return tf.keras.Model([input_x1, input_x2], [output])
 
 
 def load_data():
@@ -129,27 +138,50 @@ def load_data():
 if __name__ == '__main__':
     # Simple commandline interface for configuring the execution.
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        description='')
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter, description=''
+    )
     parser.add_argument(
-        '-ep', '--num_epochs', type=int, default=500,
-        help='Number of epochs the model should be trained.')
+        '-ep',
+        '--num_epochs',
+        type=int,
+        default=500,
+        help='Number of epochs the model should be trained.',
+    )
     parser.add_argument(
-        '-bs', '--batch-size', type=int, default=8,
-        help='The batch size used in every training iteration.')
+        '-bs',
+        '--batch-size',
+        type=int,
+        default=8,
+        help='The batch size used in every training iteration.',
+    )
     parser.add_argument(
-        '-l2', '--l2-factor', type=float, default=1e-4,
-        help='The l2 regularization strength.')
+        '-l2',
+        '--l2-factor',
+        type=float,
+        default=1e-4,
+        help='The l2 regularization strength.',
+    )
     parser.add_argument(
-        '-lr', '--learning-rate', type=float, default=0.01,
-        help='The learning rate for SGD.')
+        '-lr',
+        '--learning-rate',
+        type=float,
+        default=0.01,
+        help='The learning rate for SGD.',
+    )
     parser.add_argument(
-        '-d', '--experiment-dir', type=str,
+        '-d',
+        '--experiment-dir',
+        type=str,
         default='./experiments/mymodel_bs[8]_l2[1e-4]_lr[1e-2])',
-        help='The path to the experiment directory.')
+        help='The path to the experiment directory.',
+    )
     parser.add_argument(
-        '-v', '--verbose', type=int, default=0,
-        help='The level of logging during training.')
+        '-v',
+        '--verbose',
+        type=int,
+        default=0,
+        help='The level of logging during training.',
+    )
     args = parser.parse_args()
     config = vars(args)
     main(**config)
